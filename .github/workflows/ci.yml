@@ -44,30 +44,6 @@ jobs:
       - name: Run E2E tests
         run: ./gradlew test --tests "*E2ETest"
 
-      - name: Generate test report
-        if: always()
-        run: ./gradlew test
-
-      - name: Publish test results
-        if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          files: |
-            build/test-results/**/*.xml
-
-      - name: Upload test coverage
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: build/test-results/
-
-      - name: Upload SpotBugs report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: spotbugs-report
-          path: build/reports/spotbugs/
-
       - name: All checks passed
-        run: echo "OK"
+        run: |
+          echo "OK"
